@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Collect Glyphs</title>
+  <script>
+    function saveGlyph() {
+      const canvas = document.getElementById("canvas");
+      const dataURL = canvas.toDataURL("image/png");
+      document.getElementById("dataURL").value = dataURL;
+      document.getElementById("form").submit();
+    }
+  </script>
+</head>
+<body>
+  <h1>Collect Glyphs</h1>
+  <form id="form" method="POST">
+    <label>Hərf: <input type="text" name="char" maxlength="1" required></label>
+    <br><br>
+    <canvas id="canvas" width="200" height="200" style="border:1px solid"></canvas>
+    <br>
+    <input type="hidden" name="dataURL" id="dataURL">
+    <button type="button" onclick="saveGlyph()">Save sample</button>
+  </form>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.lineWidth = 4;
+    let drawing = false;
+    canvas.onmousedown = e => { drawing = true; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); };
+    canvas.onmousemove = e => { if(drawing){ ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); }};
+    canvas.onmouseup = () => drawing = false;
+    canvas.onmouseleave = () => drawing = false;
+  </script>
+</body>
+</html>
