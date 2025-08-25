@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OCR</title>
+</head>
+<body>
+  <h1>OCR (Əlyazma Oxuma)</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/*" required>
+    <button type="submit">Yüklə və Oxu</button>
+  </form>
+  {% if text %}
+  <h2>Nəticə:</h2>
+  <p>{{ text }}</p>
+  {% endif %}
+</body>
+</html>
